@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Arun Luiz | Career Architect & Personal Brand Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --ink:        #0F2041;
+      --ink-deep:   #080F1F;
+      --gold:       #C9A84C;
+      --gold-light: #E8C96A;
+      --mint:       #7FAAA0;
+      --mint-bg:    #EBF4F2;
+      --off-white:  #F7F5F0;
+      --text:       #2D2D2D;
+      --muted:      #6B7280;
+      --white:      #FFFFFF;
+      --border:     #E5E7EB;
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; font-size: 16px; }
+    body  { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    img   { display: block; max-width: 100%; }
+    a     { text-decoration: none; }
+
+    /* ── UTILITIES ──────────────────────────────────────── */
+    .container   { max-width: 1140px; margin: 0 auto; width: 100%; }
+    .serif       { font-family: 'Cormorant Garamond', serif; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--mint);
+      margin-bottom: 14px;
+    }
+    .eyebrow::after {
+      content: ''; display: block; width: 36px; height: 1px; background: currentColor;
+    }
+    .eyebrow-gold { color: var(--gold); }
+    .eyebrow-gold::after { background: var(--gold); }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      font-weight: 700; color: var(--ink);
+      line-height: 1.12; letter-spacing: -.01em;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold); color: var(--ink);
+      font-size: .88rem; font-weight: 600;
+      padding: 14px 30px; border-radius: 4px;
+      letter-spacing: .04em;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(201,168,76,.28);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.3); color: var(--white);
+      font-size: .88rem; font-weight: 400;
+      padding: 14px 30px; border-radius: 4px;
+      letter-spacing: .04em;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── NAVBAR ─────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; width: 100%; z-index: 999;
+      background: rgba(15,32,65,.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,.18);
+      height: 68px; transition: height .25s;
+    }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 100%; padding: 0 5%;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .logo-svg  { width: 40px; height: 40px; flex-shrink: 0; }
+    .nav-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); letter-spacing: .02em; line-height: 1;
+      display: block;
+    }
+    .nav-brand-sub {
+      font-size: .6rem; font-weight: 500;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-top: 3px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; color: rgba(255,255,255,.7);
+      letter-spacing: .04em; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links .nav-cta {
+      background: var(--gold); color: var(--ink);
+      font-weight: 600; padding: 8px 20px; border-radius: 4px;
+      transition: background .2s;
+    }
+    .nav-links .nav-cta:hover { background: var(--gold-light); color: var(--ink); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 110px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow-1 {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%);
+      top: 5%; right: -10%; pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(127,170,160,.05) 0%, transparent 70%);
+      bottom: 0; left: -8%; pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: 64px; align-items: center;
+      width: 100%; max-width: 1140px; position: relative; z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 22px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 26px; height: 1px; background: var(--gold);
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5vw, 5rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.06; letter-spacing: -.01em;
+      margin-bottom: 28px;
+    }
+    .hero-h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,.65); line-height: 1.85;
+      max-width: 490px; margin-bottom: 38px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+    /* Photo frame */
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .photo-frame {
+      width: 300px; height: 370px;
+      background: rgba(201,168,76,.07);
+      border: 1px solid rgba(201,168,76,.28);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: visible;
+    }
+    .photo-frame img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 12px;
+    }
+    .photo-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; font-style: italic;
+      color: rgba(201,168,76,.45); text-align: center;
+      line-height: 1.8;
+    }
+    /* Corner accents */
+    .corner { position: absolute; width: 22px; height: 22px; border-style: solid; border-color: var(--gold); }
+    .c-tl { top: 10px; left: 10px;  border-width: 2px 0 0 2px; }
+    .c-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+    .c-bl { bottom: 10px; left: 10px;  border-width: 0 0 2px 2px; }
+    .c-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+    /* Floating badges */
+    .badge {
+      position: absolute;
+      background: rgba(15,32,65,.92);
+      border: 1px solid rgba(201,168,76,.35);
+      padding: 10px 14px; border-radius: 9px;
+      backdrop-filter: blur(8px); white-space: nowrap;
+    }
+    .badge-lbl {
+      display: block; font-size: .58rem; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 3px;
+    }
+    .badge-val {
+      display: block; font-size: .78rem; font-weight: 500; color: var(--white);
+    }
+    .badge-a { top: -18px; left: -38px; }
+    .badge-b { bottom: 54px; left: -50px; }
+    .badge-c { top: 24px; right: -44px; }
+
+    /* Stats strip */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: rgba(255,255,255,.08);
+      border-radius: 10px; overflow: hidden;
+      width: 100%; max-width: 1140px;
+      position: relative; z-index: 1; margin-top: 56px;
+    }
+    .stat-cell {
+      background: rgba(255,255,255,.04);
+      padding: 24px 20px; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--gold); line-height: 1; margin-bottom: 7px;
+    }
+    .stat-lbl {
+      font-size: .72rem; font-weight: 400;
+      color: rgba(255,255,255,.5); letter-spacing: .06em;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────── */
+    #about { padding: 110px 5%; background: var(--off-white); }
+    .about-grid {
+      display: grid; grid-template-columns: 260px 1fr;
+      gap: 80px; align-items: start;
+      margin-top: 56px;
+    }
+
+    /* Left column: photo + journey */
+    .about-photo-wrap { position: relative; }
+    .about-photo {
+      width: 260px; height: 320px;
+      background: var(--ink);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); font-size: .75rem;
+      letter-spacing: .1em; position: relative; overflow: hidden;
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+    .about-photo-shadow {
+      position: absolute; bottom: -12px; right: -12px;
+      width: 260px; height: 320px;
+      border: 2px solid var(--gold); border-radius: 8px; z-index: -1;
+    }
+
+    .journey { margin-top: 36px; }
+    .journey-row {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding-bottom: 18px;
+      border-left: 1px dashed rgba(201,168,76,.3);
+      margin-left: 5px; padding-left: 18px; position: relative;
+    }
+    .journey-row::before {
+      content: ''; position: absolute; left: -5px; top: 5px;
+      width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+    }
+    .j-year {
+      font-size: .64rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--mint); display: block; margin-bottom: 2px;
+    }
+    .j-title { font-size: .82rem; font-weight: 500; color: var(--ink); }
+
+    /* Right column */
+    .about-bio {
+      font-size: .97rem; font-weight: 300;
+      line-height: 1.95; color: #454545; margin-bottom: 28px;
+    }
+    .pullquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-weight: 600; font-style: italic;
+      color: var(--ink); line-height: 1.5;
+      border-left: 3px solid var(--gold);
+      padding: 4px 0 4px 24px; margin: 28px 0;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; }
+    .chip {
+      background: var(--ink); color: var(--white);
+      font-size: .68rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 100px; letter-spacing: .04em;
+    }
+
+    /* ── SERVICES ───────────────────────────────────────── */
+    #services { padding: 110px 5%; background: var(--white); }
+    .services-intro { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+    .services-intro .eyebrow { justify-content: center; }
+    .services-intro .eyebrow::after { display: none; }
+    .services-intro p {
+      font-size: .92rem; font-weight: 300;
+      color: var(--muted); line-height: 1.85; margin-top: 16px;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 22px; max-width: 1100px; margin: 0 auto;
+    }
+
+    .svc-card {
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 34px 26px;
+      position: relative; overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .svc-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--mint));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s;
+    }
+    .svc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(15,32,65,.1);
+      border-color: rgba(201,168,76,.3);
+    }
+    .svc-card:hover::before { transform: scaleX(1); }
+
+    .svc-icon {
+      width: 46px; height: 46px;
+      background: var(--mint-bg); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .svc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--ink); line-height: 1.2; margin-bottom: 12px;
+    }
+    .svc-desc {
+      font-size: .86rem; font-weight: 300;
+      line-height: 1.8; color: #555; margin-bottom: 18px;
+    }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      font-size: .64rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px;
+    }
+    .tag-for  { background: var(--mint-bg); color: var(--mint); }
+    .tag-mode { background: rgba(201,168,76,.1); color: #9E7B2A; }
+
+    /* ── TESTIMONIALS ───────────────────────────────────── */
+    #testimonials { padding: 110px 5%; background: var(--off-white); }
+    .testi-intro { text-align: center; max-width: 540px; margin: 0 auto 56px; }
+    .testi-intro .eyebrow { justify-content: center; }
+    .testi-intro .eyebrow::after { display: none; }
+
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 22px; max-width: 1100px; margin: 0 auto;
+    }
+    .testi-card {
+      background: var(--white); border-radius: 12px;
+      padding: 30px 26px;
+      box-shadow: 0 2px 18px rgba(0,0,0,.05);
+    }
+    .qmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem; color: var(--gold);
+      line-height: .5; opacity: .35;
+      margin-bottom: 16px; display: block;
+    }
+    .testi-text {
+      font-size: .87rem; font-weight: 300;
+      font-style: italic; line-height: 1.85;
+      color: #454545; margin-bottom: 22px;
+    }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 700; color: var(--gold);
+    }
+    .author-name  { font-size: .86rem; font-weight: 600; color: var(--ink); }
+    .author-role  { font-size: .72rem; color: var(--muted); margin-top: 1px; }
+
+    /* ── CONTACT ────────────────────────────────────────── */
+    #contact {
+      padding: 110px 5%;
+      background: var(--ink); position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 85% 10%, rgba(201,168,76,.07) 0%, transparent 55%),
+                  radial-gradient(ellipse at 10% 90%, rgba(127,170,160,.05) 0%, transparent 45%);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; position: relative; z-index: 1;
+    }
+
+    .c-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.18; margin-bottom: 18px;
+    }
+    .c-desc {
+      font-size: .92rem; font-weight: 300;
+      color: rgba(255,255,255,.6); line-height: 1.85; margin-bottom: 38px;
+    }
+    .c-items { display: flex; flex-direction: column; gap: 18px; }
+    .c-item  { display: flex; align-items: center; gap: 14px; }
+    .c-ico {
+      width: 38px; height: 38px; flex-shrink: 0;
+      border: 1px solid rgba(201,168,76,.3); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .c-lbl {
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 3px;
+    }
+    .c-val { font-size: .88rem; color: rgba(255,255,255,.8); }
+
+    /* Form */
+    .form { display: flex; flex-direction: column; gap: 16px; }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fl {
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.4);
+    }
+    .fi, .fs, .ft {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px; padding: 12px 15px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; font-weight: 300; color: var(--white);
+      outline: none; transition: border-color .2s; width: 100%;
+    }
+    .fi::placeholder, .ft::placeholder { color: rgba(255,255,255,.2); }
+    .fi:focus, .fs:focus, .ft:focus { border-color: var(--gold); }
+    .ft { resize: vertical; min-height: 96px; }
+    .fs { appearance: none; cursor: pointer; }
+    .fs option { background: var(--ink); color: var(--white); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .f-submit {
+      display: inline-block; background: var(--gold); color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; font-weight: 600; letter-spacing: .04em;
+      padding: 14px 30px; border-radius: 4px;
+      border: 1px solid var(--border); cursor: pointer; align-self: flex-start;
+      transition: background .2s, transform .2s;
+    }
+    .f-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--ink-deep);
+      border-top: 1px solid rgba(201,168,76,.12);
+      padding: 30px 5%;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .foot-copy {
+      font-size: .78rem; color: rgba(255,255,255,.32);
+    }
+    .foot-copy span { color: var(--gold); }
+    .foot-nav { display: flex; gap: 22px; list-style: none; }
+    .foot-nav a {
+      font-size: .75rem; color: rgba(255,255,255,.3);
+      transition: color .2s;
+    }
+    .foot-nav a:hover { color: var(--gold); }
+    .foot-social { display: flex; gap: 10px; }
+    .s-ico {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, background .2s;
+    }
+    .s-ico:hover { border-color: var(--gold); background: rgba(201,168,76,.08); }
+
+    /* ── WHATSAPP FLOAT ─────────────────────────────────── */
+    .wa-btn {
+      position: fixed; bottom: 28px; right: 28px; z-index: 998;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,.55); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-grid     { grid-template-columns: 1fr; }
+      .hero-visual   { display: none; }
+      .hero-stats    { grid-template-columns: repeat(2,1fr); }
+      .about-grid    { grid-template-columns: 1fr; }
+      .about-photo-wrap { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testi-grid    { grid-template-columns: 1fr; }
+      .contact-grid  { grid-template-columns: 1fr; gap: 50px; }
+      .nav-links li:not(:last-child) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-stats    { grid-template-columns: 1fr 1fr; }
+      .form-row      { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ╔══════════════════════╗
+       ║       NAVBAR          ║
+       ╚══════════════════════╝ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!-- LOGO SVG: Compass star in gold hexagon -->
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="6" fill="#C9A84C" fill-opacity=".1"/>
+          <rect x=".5" y=".5" width="39" height="39" rx="5.5" stroke="#C9A84C" stroke-opacity=".45"/>
+          <!-- 4-point compass star -->
+          <path d="M20 7 L22 17.5 L32 20 L22 22.5 L20 33 L18 22.5 L8 20 L18 17.5 Z"
+                fill="#C9A84C" fill-opacity=".85"/>
+          <circle cx="20" cy="20" r="3" fill="#C9A84C"/>
+        </svg>
+        <div>
+          <span class="nav-brand-name">Dr. Arun Luiz T.</span>
+          <span class="nav-brand-sub">Career Architect &amp; Brand Coach</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Stories</a></li>
+        <li><a href="#contact" class="nav-cta">Book a Session</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ╔══════════════════════╗
+       ║         HERO          ║
+       ╚══════════════════════╝ -->
+  <section id="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left: Text -->
+        <div>
+          <div class="hero-eyebrow">PhD · IIT Madras &nbsp;|&nbsp; 15+ Years in Education</div>
+          <h1 class="hero-h1">
+            Your Career.<br>
+            Your Brand.<br>
+            <em>Your Story.</em>
+          </h1>
+          <p class="hero-sub">
+            Guiding students and professionals from confusion to clarity — through
+            evidence-based career counselling, NLP coaching, and LinkedIn mastery
+            that turns your profile into a magnet for opportunity.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+            <a href="#services" class="btn-ghost">Explore Services</a>
+          </div>
+        </div>
+
+        <!-- Right: Photo + floating badges -->
+        <div class="hero-visual">
+          <div class="photo-frame">
+            <div class="corner c-tl"></div>
+            <div class="corner c-tr"></div>
+            <div class="corner c-bl"></div>
+            <div class="corner c-br"></div>
+            <!--
+              REPLACE: swap the <div> below with:
+              <img src="your-photo.jpg" alt="Dr. Arun Luiz T." />
+            -->
+            <img src="https://cdn.sanity.io/images/k1fphtd3/production/38de76b1b2ce237b9852f27cf793945444785907-572x664.jpg" alt="Founder Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
+          </div>
+
+          <div class="badge badge-a">
+            <span class="badge-lbl">Qualification</span>
+            <span class="badge-val">PhD · IIT Madras</span>
+          </div>
+          <div class="badge badge-b">
+            <span class="badge-lbl">Certified</span>
+            <span class="badge-val">NLP Practitioner</span>
+          </div>
+          <div class="badge badge-c">
+            <span class="badge-lbl">Expertise</span>
+            <span class="badge-val">LinkedIn &amp; Branding</span>
+          </div>
+        </div>
+
+      </div><!-- /hero-grid -->
+
+      <!-- Stats strip -->
+      <div class="hero-stats">
+        <div class="stat-cell">
+          <div class="stat-num">15+</div>
+          <div class="stat-lbl">Years in Education</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">4,000+</div>
+          <div class="stat-lbl">Professionals Trained</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">4M+</div>
+          <div class="stat-lbl">Organic Impressions</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">Top 3%</div>
+          <div class="stat-lbl">Udemy Instructor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════╗
+       ║         ABOUT         ║
+       ╚══════════════════════╝ -->
+  <section id="about">
+    <div class="container">
+      <span class="eyebrow">About the Mentor</span>
+      <h2 class="section-title">From the Research Lab<br>to the Career Coaching Room</h2>
+
+      <div class="about-grid">
+
+        <!-- Left: Photo + timeline -->
+        <div class="about-photo-wrap">
+          <div class="about-photo">
+            <!--
+              REPLACE with:
+              <img src="your-photo.jpg" alt="Dr. Arun Luiz T." />
+            -->
+            <img src="https://cdn.sanity.io/images/k1fphtd3/production/38de76b1b2ce237b9852f27cf793945444785907-572x664.jpg" alt="Founder Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+          </div>
+          <div class="about-photo-shadow"></div>
+
+          <div class="journey">
+            <div class="journey-row">
+              <div>
+                <span class="j-year">IIT Madras</span>
+                <span class="j-title">PhD Researcher · Chemistry &amp; Heritage Science</span>
+              </div>
+            </div>
+            <div class="journey-row">
+              <div>
+                <span class="j-year">SSN College of Engineering</span>
+                <span class="j-title">Assistant Professor · 15+ Years</span>
+              </div>
+            </div>
+            <div class="journey-row">
+              <div>
+                <span class="j-year">Certifications</span>
+                <span class="j-title">NLP · Corporate Trainer · Global Career Counsellor</span>
+              </div>
+            </div>
+            <div class="journey-row">
+              <div>
+                <span class="j-year">LinkedIn &amp; Udemy</span>
+                <span class="j-title">4M+ Impressions · Top 3% Instructor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Bio -->
+        <div>
+          <p class="about-bio">
+            Dr. Arun Luiz T. holds a PhD from the prestigious Indian Institute of Technology (IIT) Madras
+            and has spent over 15 years as an Assistant Professor at SSN College of Engineering, Chennai.
+            But his impact does not stay within the walls of academia. He is a Certified Global Career
+            Counsellor, a Certified NLP Practitioner, and a Certified Corporate Trainer — three pillars
+            that come together in every coaching engagement he delivers.
+          </p>
+
+          <div class="pullquote">
+            "A career is not a ladder to climb. It is a story to write — and I help you make it one
+            worth telling."
+          </div>
+
+          <p class="about-bio">
+            With 4,000+ professionals trained, a Top 3% Udemy ranking, 4 million+ organic LinkedIn
+            impressions, and 4 published textbooks to his name, Dr. Arun bridges the worlds of
+            rigorous research and practical transformation. His interest in mental health and
+            neuro-linguistic programming makes him one of the few career counsellors who addresses
+            not just where you want to go — but what's keeping you from getting there.
+          </p>
+
+          <div class="chips">
+            <span class="chip">PhD · IIT Madras</span>
+            <span class="chip">Certified NLP Practitioner</span>
+            <span class="chip">Certified Global Career Counsellor</span>
+            <span class="chip">Certified Corporate Trainer</span>
+            <span class="chip">Top 3% Udemy Instructor</span>
+            <span class="chip">4 Published Textbooks</span>
+            <span class="chip">Mental Health Advocate</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════╗
+       ║       SERVICES        ║
+       ╚══════════════════════╝ -->
+  <section id="services">
+    <div class="services-intro">
+      <span class="eyebrow">What I Offer</span>
+      <h2 class="section-title">Six Pathways.<br>One Purpose.</h2>
+      <p>
+        Every engagement is personalised, evidence-based, and designed to create
+        measurable change — in your mindset, your profile, and your career trajectory.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <!-- Career map icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">Career Clarity Session</h3>
+        <p class="svc-desc">
+          One-on-one counselling using psychometric tools and stanine-score profiling
+          to cut through confusion and build a clear, actionable career roadmap
+          aligned to your strengths, personality, and life goals.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">Students &amp; Graduates</span>
+          <span class="tag tag-mode">Hybrid</span>
+        </div>
+      </div>
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/>
+            <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">LinkedIn Transformation</h3>
+        <p class="svc-desc">
+          A complete LinkedIn overhaul — headline, summary, featured section,
+          content strategy — that positions you as a credible authority and
+          generates the organic reach that attracts opportunities to your inbox.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">Professionals &amp; Coaches</span>
+          <span class="tag tag-mode">Online</span>
+        </div>
+      </div>
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">Personal Brand Blueprint</h3>
+        <p class="svc-desc">
+          Build a powerful, authentic digital identity that makes people trust you
+          before you speak. Strategy, content pillars, bio craft, and a 90-day
+          visibility roadmap — tailored entirely to your niche and voice.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">Consultants &amp; Trainers</span>
+          <span class="tag tag-mode">Online / Offline</span>
+        </div>
+      </div>
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">NLP Career Coaching</h3>
+        <p class="svc-desc">
+          Reprogram the limiting beliefs and fears that are quietly sabotaging your
+          career. Using Neuro-Linguistic Programming, we unlock peak confidence,
+          sharper communication, and an unshakeable professional identity.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">All Professionals</span>
+          <span class="tag tag-mode">Online / Offline</span>
+        </div>
+      </div>
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">Student Mentorship Program</h3>
+        <p class="svc-desc">
+          Long-term guided mentoring for college students — from stream selection
+          and psychometric profiling to internship strategy and the mindset shift
+          from student to sought-after young professional.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">UG &amp; PG Students</span>
+          <span class="tag tag-mode">Hybrid</span>
+        </div>
+      </div>
+
+      <div class="svc-card fade-up">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FAAA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3 class="svc-name">Workshops &amp; Masterclasses</h3>
+        <p class="svc-desc">
+          High-impact workshops on LinkedIn, personal branding, and career
+          readiness — designed for colleges, corporates, coaching communities,
+          and faculty bodies. Customised to your audience's level and goals.
+        </p>
+        <div class="svc-tags">
+          <span class="tag tag-for">Colleges &amp; Corporates</span>
+          <span class="tag tag-mode">Offline / Hybrid</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════╗
+       ║       PACKAGES        ║
+       ╚══════════════════════╝ -->
+  
+    <style>
+      .mentoria-section { background-color: var(--off-white); padding: 60px 5%; font-family: 'DM Sans', sans-serif; text-align: center; }
+      .mentoria-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--ink); font-weight: 700; margin-bottom: 10px; }
+      .mentoria-subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 40px; }
+      
+      .mentoria-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+      .mentoria-tab { background: var(--white); color: var(--ink); font-size: 0.75rem; font-weight: 700; padding: 12px 24px; border-radius: 30px; cursor: pointer; border: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+      .mentoria-tab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+      
+      .mentoria-grid { display: none; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto; text-align: left; }
+      .mentoria-grid.active { display: grid; }
+      
+      .mentoria-card { background: var(--white); border-radius: 12px; padding: 40px 30px; position: relative; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+      .mentoria-card.popular { border: 2px solid var(--gold); }
+      
+      .popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--mint); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+      .popular-badge::after { content: ''; position: absolute; bottom: -4px; right: -4px; border-width: 4px; border-style: solid; border-color: #5f847b transparent transparent #5f847b; }
+      
+      .m-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ink); font-weight: 700; margin-bottom: 5px; }
+      .m-card-brand { font-size: 0.8rem; color: var(--muted); margin-bottom: 15px; }
+      .m-card-price { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--ink); font-weight: 700; margin-bottom: 20px; }
+      .m-card-features { list-style: none; padding: 0; margin: 0 0 30px 0; font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+      .m-card-features li { position: relative; padding-left: 24px; margin-bottom: 12px; }
+      .m-card-features li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--mint); font-weight: bold; background: var(--mint-bg); width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; }
+      
+      .m-btn { display: block; width: 100%; text-align: center; background: #431E8C; color: white; padding: 14px 0; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+      .m-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(201,168,76,0.28); }
+
+      .customise-section { margin-top: 80px; }
+      .customise-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--ink); font-weight: 700; margin-bottom: 10px; }
+      .custom-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 40px auto 0; text-align: left; }
+      .custom-card { display: flex; background: var(--white); border-radius: 12px; padding: 20px; border: 1px solid var(--border); align-items: flex-start; gap: 20px; }
+      .custom-icon { width: 80px; height: 80px; background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.28); border-radius: 8px; flex-shrink: 0; }
+      .custom-content { flex-grow: 1; }
+      .custom-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); font-weight: 700; margin-bottom: 5px; }
+      .custom-price { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); font-weight: 700; margin-bottom: 10px; }
+      .custom-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; margin-bottom: 15px; }
+      .custom-btn { background: #431E8C; color: white; padding: 8px 20px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--border); cursor: pointer; }
+
+      @media (max-width: 768px) {
+        .mentoria-grid, .custom-grid { grid-template-columns: 1fr; }
+        .custom-card { flex-direction: column; align-items: center; text-align: center; }
+      }
+    </style>
+
+    <div class="mentoria-section" id="packages">
+      <h2 class="mentoria-title">Mentoria Packages</h2>
+      <p class="mentoria-subtitle">Choose the right Mentoria plan for your career growth</p>
+
+      <div class="mentoria-tabs">
+        <button class="mentoria-tab active" onclick="showTab('tab-8-9')">8-9 STUDENTS</button>
+        <button class="mentoria-tab" onclick="showTab('tab-10-12')">10-12 STUDENTS</button>
+        <button class="mentoria-tab" onclick="showTab('tab-college')">COLLEGE GRADUATES</button>
+        <button class="mentoria-tab" onclick="showTab('tab-working')">WORKING PROFESSIONALS</button>
+      </div>
+
+      <!-- 8-9 STUDENTS -->
+      <div class="mentoria-grid active" id="tab-8-9">
+        <div class="mentoria-card">
+          <h3 class="m-card-title">Discover</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹5,500</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests</li>
+            <li>1 career counselling session with Mentoria's expert career coaches</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Invites to live webinars by industry experts</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+        <div class="mentoria-card popular">
+          <div class="popular-badge">★ Popular</div>
+          <h3 class="m-card-title">Discover Plus+</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹15,000</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessments to measure your interests, personality and abilities</li>
+            <li>8 career counselling sessions (1 every year) with Mentoria's expert career coaches until graduation</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Invites to live webinars by industry experts</li>
+            <li>Customised reports after each session with education pathways</li>
+            <li>Guidance on studying abroad</li>
+            <li>CV building during internships/graduation</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+      </div>
+
+      <!-- 10-12 STUDENTS -->
+      <div class="mentoria-grid" id="tab-10-12">
+        <div class="mentoria-card">
+          <h3 class="m-card-title">Achieve Online</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹5,999</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>1 career counselling session</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Pre-recorded webinars by industry experts</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+        <div class="mentoria-card popular">
+          <div class="popular-badge">★ Popular</div>
+          <h3 class="m-card-title">Achieve Plus+</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹10,599</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>4 career counselling sessions</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Attend live webinars by industry experts</li>
+            <li>Customised reports after each session with education pathways</li>
+            <li>Guidance on studying abroad</li>
+            <li>CV reviews during internships/graduation</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+      </div>
+
+      <!-- COLLEGE GRADUATES -->
+      <div class="mentoria-grid" id="tab-college">
+        <div class="mentoria-card">
+          <h3 class="m-card-title">Ascend Online</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹6,499</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>1 career counselling session</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Pre-recorded webinars by industry experts</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+        <div class="mentoria-card popular">
+          <div class="popular-badge">★ Popular</div>
+          <h3 class="m-card-title">Ascend Plus+</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹10,599</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>3 career counselling sessions</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Attend live webinars by industry experts</li>
+            <li>Customised reports after each session with information on certificate/online courses</li>
+            <li>Guidance on studying abroad</li>
+            <li>CV reviews for job application</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+      </div>
+
+      <!-- WORKING PROFESSIONALS (Same as College for now based on screenshot 4) -->
+      <div class="mentoria-grid" id="tab-working">
+        <div class="mentoria-card">
+          <h3 class="m-card-title">Ascend Online</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹6,499</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>1 career counselling session</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Pre-recorded webinars by industry experts</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+        <div class="mentoria-card popular">
+          <div class="popular-badge">★ Popular</div>
+          <h3 class="m-card-title">Ascend Plus+</h3>
+          <div class="m-card-brand">Mentoria</div>
+          <div class="m-card-price">₹10,599</div>
+          <ul class="m-card-features">
+            <li>Psychometric assessment to measure your interests, personality and abilities</li>
+            <li>3 career counselling sessions</li>
+            <li>Lifetime access to Knowledge Gateway</li>
+            <li>Attend live webinars by industry experts</li>
+            <li>Customised reports after each session with information on certificate/online courses</li>
+            <li>Guidance on studying abroad</li>
+            <li>CV reviews for job application</li>
+          </ul>
+          <a href="#" class="m-btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="customise-section" id="customise-section">
+        <h2 class="customise-title">Want To Customise Your Mentorship Plan?</h2>
+        <p class="mentoria-subtitle">If you want to subscribe to specific services from Mentoria that resolve your career challenges,<br>you can choose one or more of the following:</p>
+        <div class="custom-grid">
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">Career Report</h4>
+                <div class="custom-price">₹1,500</div>
+                <p class="custom-desc">Get a detailed report of your psychometric assessment for a scientific analysis of your interests. Find out where your interests lie and which future paths you can potentially consider.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">Career Report + Career Counselling</h4>
+                <div class="custom-price">₹3,000</div>
+                <p class="custom-desc">Connect with India's top career coaches to analyse your psychometric report and shortlist the top three career paths you're most likely to enjoy and excel at.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">Knowledge Gateway + Career Helpline Access</h4>
+                <div class="custom-price">₹100</div>
+                <p class="custom-desc">Unlock holistic information on your career paths and get direct access to Mentoria's experts, who will resolve your career-related queries.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">One-to-One Session with a Career Expert</h4>
+                <div class="custom-price">₹1,500</div>
+                <p class="custom-desc">Resolve your career queries and glimpse into your future world through a one-on-one session with an expert from your chosen field.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">College Admission Planning</h4>
+                <div class="custom-price">₹3,000</div>
+                <p class="custom-desc">Get unbiased recommendations and details on your future college options in India and abroad, organised in one resourceful planner.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+            <div class="custom-card">
+              
+              <div class="custom-content">
+                <h4 class="custom-title">Exam Stress Management</h4>
+                <div class="custom-price">₹1,000</div>
+                <p class="custom-desc">Get expert guidance on tackling exam stress, planning your study schedule, revision tips and more from India's top educators.</p>
+                <button class="custom-btn">Buy Now</button>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showTab(tabId) {
+        document.querySelectorAll('.mentoria-grid').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.mentoria-tab').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+        
+        // Only show customize section for 8-9 students tab based on screenshot
+        if(tabId === 'tab-8-9') {
+          document.getElementById('customise-section').style.display = 'block';
+        } else {
+          document.getElementById('customise-section').style.display = 'none';
+        }
+      }
+    </script>
+  
+
+
+
+  <!-- ╔══════════════════════╗
+       ║       GALLERY         ║
+       ╚══════════════════════╝ -->
+  <section id="gallery" style="padding: 80px 5%; background: var(--mint-bg);">
+    <div class="services-intro">
+      <span class="eyebrow">Moments</span>
+      <h2 class="section-title">Gallery</h2>
+    </div>
+    <div id="gallery-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto;">
+
+    <div style="background: url(https://cdn.sanity.io/images/k1fphtd3/production/38de76b1b2ce237b9852f27cf793945444785907-572x664.jpg) center/cover no-repeat; height: 200px; border-radius: 8px;"></div>
+  
+    <div style="background: url(https://cdn.sanity.io/images/k1fphtd3/production/4bf1eb8a9157288696acb8bd92c634f77a1d01dc-591x591.jpg) center/cover no-repeat; height: 200px; border-radius: 8px;"></div>
+  
+    <div style="background: url(https://cdn.sanity.io/images/k1fphtd3/production/d161be6e4d48466b7e6ad5cfb4536bbf049e18cb-682x682.jpg) center/cover no-repeat; height: 200px; border-radius: 8px;"></div>
+  
+    <div style="background: url(https://cdn.sanity.io/images/k1fphtd3/production/30f1ba7aa331764dda227cd14c4d167052f85958-1107x830.jpg) center/cover no-repeat; height: 200px; border-radius: 8px;"></div>
+  
+    <div style="background: url(https://cdn.sanity.io/images/k1fphtd3/production/8641f79705bb01ed48611d7cb2e5ba1525441527-1280x960.jpg) center/cover no-repeat; height: 200px; border-radius: 8px;"></div>
+  
+</div>
+</section>
+
+
+  <!-- ╔══════════════════════╗
+       ║     TESTIMONIALS      ║
+       ╚══════════════════════╝ -->
+  <section id="testimonials">
+    <div class="testi-intro">
+      <span class="eyebrow">Success Stories</span>
+      <h2 class="section-title">Words from Those<br>Who Found Their Path</h2>
+    </div>
+
+    <div class="testi-grid">
+
+      <div class="testi-card fade-up">
+        <span class="qmark">"</span>
+        <p class="testi-text">
+          Dr. Arun didn't just help me fix my LinkedIn profile — he helped me
+          understand what I actually stand for professionally. Within three months,
+          I received four interview calls from companies I had been targeting for years.
+        </p>
+        <div class="testi-author">
+          <div class="avatar">A</div>
+          <div>
+            <!-- REPLACE: add real name and role -->
+            <div class="author-name">[Testimonial Name 1]</div>
+            <div class="author-role">Software Engineer → Senior Consultant</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <span class="qmark">"</span>
+        <p class="testi-text">
+          As a coach, I always felt invisible online. Dr. Arun's personal brand
+          workshop was a game-changer. My LinkedIn profile views went up 300%
+          and I landed my first paid client through a DM — within six weeks.
+        </p>
+        <div class="testi-author">
+          <div class="avatar">P</div>
+          <div>
+            <!-- REPLACE: add real name and role -->
+            <div class="author-name">[Testimonial Name 2]</div>
+            <div class="author-role">Life Coach, Chennai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <span class="qmark">"</span>
+        <p class="testi-text">
+          I was completely lost after Class 12. Dr. Arun's career counselling —
+          with the psychometric tests and detailed report — gave me the first real
+          clarity I ever felt about my future. I'm now confidently pursuing my
+          dream course.
+        </p>
+        <div class="testi-author">
+          <div class="avatar">R</div>
+          <div>
+            <!-- REPLACE: add real name and role -->
+            <div class="author-name">[Testimonial Name 3]</div>
+            <div class="author-role">Class 12 Graduate, Chennai</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════╗
+       ║       CONTACT         ║
+       ╚══════════════════════╝ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Info -->
+        <div>
+          <span class="eyebrow eyebrow-gold">Let's Connect</span>
+          <h2 class="c-title">Start Your Career<br>Transformation Today</h2>
+          <p class="c-desc">
+            Every great career begins with one honest conversation.
+            Book a free 20-minute discovery call — and let's map where
+            you are, where you want to go, and what's standing between
+            the two.
+          </p>
+
+          <div class="c-items">
+            <div class="c-item">
+              <div class="c-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 6.18 19.79 19.79 0 01.77 2h3A2 2 0 015.49 3.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L4.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="c-lbl">Phone / WhatsApp</span>
+                <!-- REPLACE -->
+                <span class="c-val">[Your Phone Number]</span>
+              </div>
+            </div>
+
+            <div class="c-item">
+              <div class="c-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <span class="c-lbl">Email</span>
+                <!-- REPLACE -->
+                <span class="c-val">[Your Email Address]</span>
+              </div>
+            </div>
+
+            <div class="c-item">
+              <div class="c-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <span class="c-lbl">Location</span>
+                <span class="c-val">Chennai, Tamil Nadu, India</span>
+              </div>
+            </div>
+
+            <div class="c-item">
+              <div class="c-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <span class="c-lbl">LinkedIn</span>
+                <!-- REPLACE -->
+                <span class="c-val">[Your LinkedIn Profile URL]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div>
+          <div class="form">
+            <div class="form-row">
+              <div class="fg">
+                <label class="fl">Your Name</label>
+                <input type="text" class="fi" placeholder="e.g. Priya Sharma" />
+              </div>
+              <div class="fg">
+                <label class="fl">Phone / WhatsApp</label>
+                <input type="tel" class="fi" placeholder="+91 98765 43210" />
+              </div>
+            </div>
+            <div class="fg">
+              <label class="fl">Email Address</label>
+              <input type="email" class="fi" placeholder="yourname@email.com" />
+            </div>
+            <div class="fg">
+              <label class="fl">I'm looking for</label>
+              <select class="fs">
+                <option value="">Select a service…</option>
+                <option>Career Clarity Session</option>
+                <option>LinkedIn Transformation</option>
+                <option>Personal Brand Blueprint</option>
+                <option>NLP Career Coaching</option>
+                <option>Student Mentorship Program</option>
+                <option>Workshop / Masterclass</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="fl">Tell me about your situation <span style="opacity:.5;font-weight:400">(optional)</span></label>
+              <textarea class="ft" placeholder="What challenge are you facing right now?"></textarea>
+            </div>
+            <button class="f-submit">Send Message →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════╗
+       ║        FOOTER         ║
+       ╚══════════════════════╝ -->
+  <footer>
+    <div class="foot-copy">
+      © 2025 <span>Dr. Arun Luiz T.</span> · All Rights Reserved
+    </div>
+    <ul class="foot-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="foot-social">
+      <!-- LinkedIn -->
+      <a href="#" class="s-ico" aria-label="LinkedIn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+      <!-- Instagram -->
+      <a href="#" class="s-ico" aria-label="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r=".5" fill="rgba(255,255,255,.45)"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a href="#" class="s-ico" aria-label="YouTube">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/[YOURPHONENUMBER]" class="wa-btn" target="_blank" aria-label="Chat on WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.102 1.523 5.823L.046 23.5a.5.5 0 00.617.617l5.703-1.476A11.941 11.941 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.93 0-3.739-.517-5.295-1.417l-.377-.223-3.91 1.012 1.013-3.882-.238-.39A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+  </a>
+
+  <script>
+    // ── Scroll-triggered fade-up ────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = Array.from(entry.target.parentElement?.children || []).indexOf(entry.target) * 90;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Navbar shrink on scroll ─────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').style.height =
+        window.scrollY > 60 ? '58px' : '68px';
+    }, { passive: true });
+  </script>
+
+
+  
+
+</body>
+</html>
